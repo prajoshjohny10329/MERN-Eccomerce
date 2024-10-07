@@ -4,8 +4,16 @@ TailWind Config
 Remove Strict Mode 
 Add redux
 Add Auth Slice
+Authentication Page
+    Login
+    Sign
+Admin Page
+    Header
+    SideBar
+    AdminLayout
 
 
+55
 
 
 

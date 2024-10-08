@@ -14,11 +14,17 @@ Admin Page and Components
         Header
         SideBar
         AdminLayout
+User Page and Components
+    Home
+    List
+    Account
+    Checkout
 
-Clients Page and Components
+
+404 Page and Components
 
 
-
+1.02
 
 
 @reduxjs/toolkit axios react-router-dom

@@ -17,7 +17,7 @@ import Checkout from "./pages/landing/Checkout"
 const App = () => {
 
   return (
-    <div className="flex flex-col overflow-hidden bg-black">
+    <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
 
         {/* Auth pages  */}

@@ -7,13 +7,13 @@ import AdminDashboard from "./pages/admin/AdminDashboard"
 import AdminProducts from "./pages/admin/AdminProducts"
 import AdminOrders from "./pages/admin/AdminOrders"
 import LandingLayout from "./components/landing/LandingLayout"
+import NotFound from "./pages/not-found/NotFound"
 
 
 const App = () => {
 
   return (
     <div className="flex flex-col overflow-hidden bg-black">
-      <h1>Header Component</h1>
       <Routes>
         {/* Auth pages  */}
         <Route path="/auth" element={<AuthLayout />}>
@@ -26,8 +26,10 @@ const App = () => {
           <Route path="products" element={<AdminProducts />} />
           <Route path="orders" element={<AdminOrders />} />
         </Route>
-        {/* for admin page  */}
+        {/* for Landing page  */}
         <Route path="/" element={<LandingLayout />} ></Route>
+        {/* for 404 page  */}
+        <Route path="*" element={<NotFound />} ></Route>
       </Routes>
     </div>
   )

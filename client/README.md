@@ -7,13 +7,16 @@ Add Auth Slice
 Authentication Page
     Login
     Sign
-Admin Page
-    Header
-    SideBar
-    AdminLayout
+Admin Page and Components
+    Dashboard
+    Orders
+    Products
+        Header
+        SideBar
+        AdminLayout
 
+Clients Page and Components
 
-55
 
 
 

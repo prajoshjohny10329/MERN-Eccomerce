@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Orders = () => {
+const AdminOrders = () => {
   return (
-    <div>Orders</div>
+    <div>AdminOrders</div>
   )
 }
 
-export default Orders
+export default AdminOrders

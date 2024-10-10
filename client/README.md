@@ -19,12 +19,16 @@ User Page and Components
     List
     Account
     Checkout
-
-
 404 Page and Components
 
+CheckAuth
+    user is authenticate
+    Authenticated User for ignore Authentication Pages
+    Authenticated User To access admin Pages
 
-1.02
+
+
+1.19
 
 
 @reduxjs/toolkit axios react-router-dom

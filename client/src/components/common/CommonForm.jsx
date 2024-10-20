@@ -21,6 +21,11 @@ const CommonForm = ({formControls, formData, setFormData, onSubmit, buttonText})
                         placeholder={getControlItem.placeholder}
                         id={getControlItem.name}
                         type={getControlItem.type}
+                        value={value}
+                        onChange={event => setFormData({
+                            ...formData,
+                            [getControlItem.name] : event.target.value
+                        })}
                     />
                     );
                 break;
@@ -28,7 +33,10 @@ const CommonForm = ({formControls, formData, setFormData, onSubmit, buttonText})
             //for select tag
             case 'select' :{
                 element = (
-                    <Select>
+                    <Select onValueChange={(value) =>setFormData({
+                        ...formData,
+                        [getControlItem.name] : value
+                    })} value={value} >
                         <SelectTrigger className='w-full'>
                             <SelectValue placeholder={getControlItem.placeholder}>
 
@@ -54,6 +62,11 @@ const CommonForm = ({formControls, formData, setFormData, onSubmit, buttonText})
                         name={getControlItem.name}
                         placeholder={getControlItem.placeholder}
                         id={getControlItem.name}
+                        value={value}
+                        onChange={event => setFormData({
+                            ...formData,
+                            [getControlItem.name] : event.target.value
+                        })}
                     />
                 );
                 break;
@@ -65,6 +78,11 @@ const CommonForm = ({formControls, formData, setFormData, onSubmit, buttonText})
                         placeholder={getControlItem.placeholder}
                         id={getControlItem.name}
                         type={getControlItem.type}
+                        value={value}
+                        onChange={event => setFormData({
+                            ...formData,
+                            [getControlItem.name] : event.target.value
+                        })}
                         
                     />
                 );

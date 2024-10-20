@@ -16,12 +16,12 @@ import CheckAuth from "./components/common/CheckAuth"
 
 
 const App = () => {
-  const isAuthenticate = true;
-  // const user  = null;
-  const user = {
-    name:'hi',
-    role: 'user'
-  };
+  const isAuthenticate = false;
+  const user  = null;
+  // const user = {
+  //   name:'hi',
+  //   role: 'user'
+  // };
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">

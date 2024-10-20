@@ -1,4 +1,4 @@
-const registerFormControls =[
+const signUpFormControls =[
     {
         name: 'name',
         label: 'Name',
@@ -23,4 +23,4 @@ const registerFormControls =[
     
 ]
 
-export default registerFormControls;
+export default signUpFormControls;

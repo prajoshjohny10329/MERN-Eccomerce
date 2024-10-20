@@ -14,6 +14,13 @@ const signUpFormControls =[
         type: 'text'
     },
     {
+        name: 'phone',
+        label: 'Phone',
+        placeHolder: 'Enter Your User Phone',
+        ComponentType: 'input',
+        type: 'tel'
+    },
+    {
         name: 'password',
         label: 'Password',
         placeHolder: 'Enter Your Password',

@@ -7,6 +7,7 @@ const initialState = {
   userName: "",
   email: "",
   password: "",
+  phone: ''
 };
 
 const SignUp = () => {

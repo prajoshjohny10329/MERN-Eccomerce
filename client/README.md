@@ -26,8 +26,6 @@ CheckAuth
     Authenticated User for ignore Authentication Pages
     Authenticated User To access admin Pages
 
-
-
 1.19
 
 

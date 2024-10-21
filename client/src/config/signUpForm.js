@@ -1,3 +1,5 @@
+
+//for signup form
 const signUpFormControls =[
     {
         name: 'name',

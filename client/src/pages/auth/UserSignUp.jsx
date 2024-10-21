@@ -1,5 +1,5 @@
 import CommonForm from "@/components/common/CommonForm";
-import signUpFormControls from "@/config";
+import signUpFormControls from "@/config/signUpForm";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const initialState = {
   phone: ''
 };
 
-const SignUp = () => {
+const UserSignUp = () => {
   const [formData, setFormData] = useState(initialState);
   const onSubmit = () => {
     console.log("on Submit called");
@@ -25,7 +25,7 @@ const SignUp = () => {
           Already Have an Account
           <Link
             className="font-medium ml-2 text-purple-500 hover:underline"
-            to={"auth/login"}
+            to="/auth/login"
           >
             Login
           </Link>
@@ -42,4 +42,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default UserSignUp;

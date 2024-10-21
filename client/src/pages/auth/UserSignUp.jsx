@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const initialState = {
-  userName: "",
+  name: "",
   email: "",
   password: "",
   phone: ''
@@ -15,6 +15,9 @@ const UserSignUp = () => {
   const onSubmit = () => {
     console.log("on Submit called");
   };
+
+  console.log(formData);
+  
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">

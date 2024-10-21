@@ -25,7 +25,7 @@ const UserLoginPage = () => {
             className="font-medium ml-2 text-purple-500 hover:underline"
             to="/auth/sign-up"
           >
-            Login
+            Register
           </Link>
         </p>
       </div>

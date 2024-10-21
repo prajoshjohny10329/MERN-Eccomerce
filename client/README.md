@@ -26,10 +26,10 @@ CheckAuth
     Authenticated User for ignore Authentication Pages
     Authenticated User To access admin Pages
 
-Add Dynamic Form
+Add Dynamic Forms
     signUpFormControls for require inputs
     CommonForm For input type assign
-1.41
+
 
 
 @reduxjs/toolkit axios react-router-dom

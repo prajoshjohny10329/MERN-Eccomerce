@@ -1,5 +1,6 @@
 import CommonForm from "@/components/common/CommonForm";
 import loginFormControls from "@/config/loginForm";
+import { useToast } from "@/hooks/use-toast";
 import { userLoginThunk } from "@/store/auth-slice";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -13,13 +14,29 @@ const initialState = {
 const UserLoginPage = () => {
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch()
+  const {toast}  = useToast()
 
   const onSubmit = (event) => {
     event.preventDefault()
-    console.log("on Submit called");
     dispatch(userLoginThunk(formData)).then((data) =>{
-      console.log(data);
+      const {message, success, user = null}  =  data.payload
+      console.log(data.payload);
       
+
+      if(success){
+        toast({
+          title: "Success",
+          description: message,
+          className: 'bg-black text-green-500'
+        })
+    }else{
+      toast({
+        variant: "destructive",
+        title: "Warning",
+        description: message,
+        className: "bg-black text-red-500",
+      })
+    }      
     })
 
   };

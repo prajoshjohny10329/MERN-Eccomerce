@@ -42,15 +42,16 @@ const userRegister =  async (req,res) =>{
 
 //Controller for Existing User Login
 const userLogin = async (req,res) =>{
-    console.log('login called');
-    
     try {
+
         const { email, password } = req.body;
 
         //check email is exist on database
-        const checkEmail = await User.find({ email });
+        const checkEmail = await User.findOne({ email });
         const userData = checkEmail;
         if(!checkEmail){
+            console.log('email not valid');
+            
             return res.status(201).json({
                 success: false,
                 message: 'user is not exists! please check Email'
@@ -65,6 +66,9 @@ const userLogin = async (req,res) =>{
                 message: 'Invalid Password! please check password'
             })
         }
+
+        console.log('user is exist');
+
 
         //Add jwt Token
         const AuthToken = jwt.sign({ 
@@ -85,6 +89,11 @@ const userLogin = async (req,res) =>{
 
 
     } catch (error) {
+        console.log('error in catch login api');
+        res.status(201).json({
+            success: false,
+            message: 'Something Wrong Try Again'
+        })
         
     }
 }

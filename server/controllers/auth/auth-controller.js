@@ -1,7 +1,9 @@
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User')
 
-const register =  async (req,res) =>{
+
+//Controller for new User register
+const userRegister =  async (req,res) =>{
     try {
         const { name, email, phone, password} = req.body
         const hashPassword = await bcrypt.hash(password, 12)
@@ -37,4 +39,33 @@ const register =  async (req,res) =>{
     }
 }
 
-module.exports = { register };
+//Controller for Existing User Login
+const userLogin = async (req,res) =>{
+    try {
+        const { email, password } = req.body;
+
+        //check email is exist on database
+        const checkEmail = await User.find({ email });
+        if(!checkEmail){
+            return res.status(201).json({
+                success: false,
+                message: 'user is not exists! please check Email'
+            })
+        }
+
+        //check password is exist on database
+        const hashPassword = await bcrypt.compare(password, checkEmail.password)
+        if(!hashPassword){
+            return res.status(201).json({
+                success: false,
+                message: 'Password is wrong! please check password'
+            })
+        }
+
+
+    } catch (error) {
+        
+    }
+}
+
+module.exports = { userRegister , userLogin };

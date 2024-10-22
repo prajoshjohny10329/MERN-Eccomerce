@@ -1,6 +1,8 @@
 import CommonForm from "@/components/common/CommonForm";
 import loginFormControls from "@/config/loginForm";
+import { userLoginThunk } from "@/store/auth-slice";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 const initialState = {
@@ -10,8 +12,16 @@ const initialState = {
 
 const UserLoginPage = () => {
   const [formData, setFormData] = useState(initialState);
-  const onSubmit = () => {
+  const dispatch = useDispatch()
+
+  const onSubmit = (event) => {
+    event.preventDefault()
     console.log("on Submit called");
+    dispatch(userLoginThunk(formData)).then((data) =>{
+      console.log(data);
+      
+    })
+
   };
   return (
     <div className="mx-auto w-full max-w-md space-y-6">

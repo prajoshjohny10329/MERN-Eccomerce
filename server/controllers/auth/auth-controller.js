@@ -42,6 +42,8 @@ const userRegister =  async (req,res) =>{
 
 //Controller for Existing User Login
 const userLogin = async (req,res) =>{
+    console.log('login called');
+    
     try {
         const { email, password } = req.body;
 
@@ -65,7 +67,21 @@ const userLogin = async (req,res) =>{
         }
 
         //Add jwt Token
-        const token = jwt.sign({ id: userData._id , email: userData.email , name: userData.userName} , "SECRET_KEY", {expiresIn:'60mins'})
+        const AuthToken = jwt.sign({ 
+            id: userData._id , email: userData.email , name: userData.userName },
+            "SECRET_KEY",
+            { expiresIn:'60mins' })
+        
+        //if Success send data with cookie
+        res.cookie('AuthToken', AuthToken, {httpOnly: true, secure: false}).json({
+            success: true,
+            message: 'Logged in successfully !',
+            userData:{
+                id: userData._id,
+                email: userData.email,
+                name: userData.userName
+            }
+        })
 
 
     } catch (error) {

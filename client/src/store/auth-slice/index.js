@@ -9,18 +9,34 @@ const initialState = {
 }
 
 export const userSignupThunk = createAsyncThunk('/auth/sign-up', 
-    async(FormData) =>{
+    async(formData) =>{
         console.log('async thunk called');
         
         const response = await axios.post(
             'http://localhost:5000/api/auth/signup', 
-            FormData, 
+            formData, 
             {
                 withCredentials: true,
             }
         );
 
         return response.data
+    }
+)
+
+export const userLoginThunk = createAsyncThunk('/auth/login',
+    async(formData) =>{
+        console.log('login thunk called');
+        console.log(formData);
+        
+        const response = await axios.post('http://localhost:5000/api/auth/login',
+            formData,
+            {
+                withCredentials: true,
+            }
+        )
+        return response.data
+
     }
 )
 
@@ -33,7 +49,8 @@ const authSlice = createSlice({
         }
     },
     extraReducers: (builder) =>{
-        builder.addCase(userSignupThunk.pending, (state) =>{
+        builder
+        .addCase(userSignupThunk.pending, (state) =>{
             console.log('pending');
             
             state.isLoading = true
@@ -46,6 +63,26 @@ const authSlice = createSlice({
 
         }).addCase(userSignupThunk.rejected, (state) =>{
             console.log('rejected');
+            
+            state.isLoading = false;
+            state.user = null;
+            state.isAuthenticated = false;
+
+        })
+        //for login
+        .addCase(userLoginThunk.pending, (state) =>{
+            console.log('userLoginThunk pending');
+            
+            state.isLoading = true
+        }).addCase(userLoginThunk.fulfilled, (state, action) =>{
+            console.log('userLoginThunk fulfilled');
+
+            state.isLoading = false;
+            state.user = action.payload;
+            state.isAuthenticated = false;
+
+        }).addCase(userLoginThunk.rejected, (state) =>{
+            console.log('userLoginThunk rejected');
             
             state.isLoading = false;
             state.user = null;

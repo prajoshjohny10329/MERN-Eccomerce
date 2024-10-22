@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User')
+const jwt = require('jsonwebtoken')
 
 
 //Controller for new User register
@@ -46,6 +47,7 @@ const userLogin = async (req,res) =>{
 
         //check email is exist on database
         const checkEmail = await User.find({ email });
+        const userData = checkEmail;
         if(!checkEmail){
             return res.status(201).json({
                 success: false,
@@ -58,9 +60,12 @@ const userLogin = async (req,res) =>{
         if(!hashPassword){
             return res.status(201).json({
                 success: false,
-                message: 'Password is wrong! please check password'
+                message: 'Invalid Password! please check password'
             })
         }
+
+        //Add jwt Token
+        const token = jwt.sign({ id: userData._id , email: userData.email , name: userData.userName} , "SECRET_KEY", {expiresIn:'60mins'})
 
 
     } catch (error) {

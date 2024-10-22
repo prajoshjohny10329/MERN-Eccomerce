@@ -1,7 +1,9 @@
 import CommonForm from "@/components/common/CommonForm";
 import signUpFormControls from "@/config/signUpForm";
+import { userSignupThunk } from "@/store/auth-slice";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link,useNavigate } from "react-router-dom";
 
 const initialState = {
   name: "",
@@ -12,7 +14,12 @@ const initialState = {
 
 const UserSignUp = () => {
   const [formData, setFormData] = useState(initialState);
-  const onSubmit = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    dispatch(userSignupThunk(formData))
     console.log("on Submit called");
   };
 

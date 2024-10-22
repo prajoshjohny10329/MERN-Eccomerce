@@ -25,7 +25,8 @@ app.get('/', (req, res) => {
 
 app.use(
     cors({
-        origin: process.env.CORS_ORIGIN,
+        // origin: process.env.CORS_ORIGIN,X
+        origin: 'http://localhost:5173',
         methods: ['GET', 'POST', 'DELETE', 'POST'],
         allowedHeaders: [
             'Content-Type',

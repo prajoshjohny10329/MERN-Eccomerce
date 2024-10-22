@@ -8,7 +8,7 @@ const initialState = {
 
 }
 
-const userSignup = createAsyncThunk('/auth/sign-up', 
+export const userSignupThunk = createAsyncThunk('/auth/sign-up', 
     async(FormData) =>{
         console.log('async thunk called');
         
@@ -33,14 +33,14 @@ const authSlice = createSlice({
         }
     },
     extraReducers: (builder) =>{
-        builder.addCase(userSignup.pending, (state) =>{
+        builder.addCase(userSignupThunk.pending, (state) =>{
             state.isLoading = true
-        }).addCase(userSignup.fulfilled, (state) =>{
+        }).addCase(userSignupThunk.fulfilled, (state) =>{
             state.isLoading = false;
             state.user = action.payload;
             state.isAuthenticated = false;
 
-        }).addCase(userSignup.rejected, (state) =>{
+        }).addCase(userSignupThunk.rejected, (state) =>{
             state.isLoading = false;
             state.user = null;
             state.isAuthenticated = false;

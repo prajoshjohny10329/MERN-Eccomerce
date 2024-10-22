@@ -19,7 +19,10 @@ const UserSignUp = () => {
 
   const onSubmit = (event) => {
     event.preventDefault()
-    dispatch(userSignupThunk(formData))
+    dispatch(userSignupThunk(formData)).then(() =>{
+      console.log('finsihed');
+      
+    })
     console.log("on Submit called");
   };
 

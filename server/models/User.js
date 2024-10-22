@@ -4,7 +4,6 @@ const UserSchema = new mongoose.Schema({
     userName : {
         type : String,
         required: true,
-        unique: true
     },
     email : {
         type : String,
@@ -14,7 +13,6 @@ const UserSchema = new mongoose.Schema({
     password : {
         type : String,
         required: true,
-        unique: true
     },
     phone : {
         type : String,
@@ -25,6 +23,14 @@ const UserSchema = new mongoose.Schema({
         type : String,
         default: 'user'
     },
+    createdAt: { 
+        type: Date, 
+        default: Date.now 
+    },
+    updatedAt: { 
+        type: Date,
+        default: Date.now 
+    }
 })
 
 const User = mongoose.model('User', UserSchema)

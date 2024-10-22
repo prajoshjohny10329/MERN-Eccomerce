@@ -34,13 +34,19 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) =>{
         builder.addCase(userSignupThunk.pending, (state) =>{
+            console.log('pending');
+            
             state.isLoading = true
-        }).addCase(userSignupThunk.fulfilled, (state) =>{
+        }).addCase(userSignupThunk.fulfilled, (state, action) =>{
+            console.log('fulfilled');
+
             state.isLoading = false;
             state.user = action.payload;
             state.isAuthenticated = false;
 
         }).addCase(userSignupThunk.rejected, (state) =>{
+            console.log('rejected');
+            
             state.isLoading = false;
             state.user = null;
             state.isAuthenticated = false;

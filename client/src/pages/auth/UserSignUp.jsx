@@ -4,6 +4,8 @@ import { userSignupThunk } from "@/store/auth-slice";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link,useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast"
+
 
 const initialState = {
   name: "",
@@ -16,17 +18,36 @@ const UserSignUp = () => {
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { toast } = useToast()
 
   const onSubmit = (event) => {
     event.preventDefault()
-    dispatch(userSignupThunk(formData)).then(() =>{
-      console.log('finsihed');
+    dispatch(userSignupThunk(formData)).then((data) =>{
+      const {message, success, user = null}  =  data.payload
+      console.log(success);
+
+      if(success){
+          toast({
+            title: "Success",
+            description: message,
+            className: 'bg-black text-green-500'
+          })
+      }else{
+        toast({
+          variant: "destructive",
+          title: "Warning",
+          description: message,
+          className: "bg-black text-red-500",
+        })
+      }
+      
+      console.log('userSignupThunk finished');
+
       
     })
     console.log("on Submit called");
   };
 
-  console.log(formData);
   
   return (
     <div className="mx-auto w-full max-w-md space-y-6">

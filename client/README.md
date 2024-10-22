@@ -29,6 +29,8 @@ CheckAuth
 Add Dynamic Forms
     signUpFormControls for require inputs
     CommonForm For input type assign
+    
+Add react-toastify
 
 
 

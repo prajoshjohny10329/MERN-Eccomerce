@@ -16,11 +16,15 @@ router.get( '/check-auth' ,userAuthMiddleware, (req,res)=>{
     console.log('check-auth called');
     
     const user = req.user
-    return res.status(201).json({
+    console.log(user);
+    
+    res.status(201).json({
         success: true,
         message: "User is Authenticated",
-        user
+        user: user
     })
+    console.log('retrun');
+    
 })
 
 module.exports = router;

@@ -74,7 +74,7 @@ const userLogin = async (req,res) =>{
         const AuthToken = jwt.sign({ 
             id: userData._id , email: userData.email , name: userData.userName },
             "SECRET_KEY",
-            { expiresIn:'60mins' })
+            { expiresIn:'2h' })
         
         //if Success send data with cookie
         res.cookie('AuthToken', AuthToken, {httpOnly: true, secure: false}).json({
@@ -119,7 +119,7 @@ const userAuthMiddleware = (req,res,next) =>{
     if(!authToken) {
         console.log('auth token is not');
         return res.status(401).json({
-            success: false,
+            success: false, 
             message: "User is not Login"
         })
     }
@@ -128,8 +128,13 @@ const userAuthMiddleware = (req,res,next) =>{
     try {
         const tokenDecode = jwt.verify(authToken,"SECRET_KEY")
         req.user = tokenDecode
+        console.log(tokenDecode);
         next()
+
+        
     } catch (error) {
+        console.log(error);
+        
         console.log('error in token decode');
         return res.status(401).json({
             success: false,

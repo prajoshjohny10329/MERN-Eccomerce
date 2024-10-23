@@ -43,7 +43,14 @@ ADD login Signup Api
 
 Add userCheckAuth for session 
     Frontend
-        *userAuthMiddleware .asyncThunk
+        *userAuthThunk .asyncThunk
+        *addCase .extra reducers for handling  asyncThunk
+        *dispatch .import userAuthMiddleware app for run all time
+    BACKEND
+        */check-auth        . 
+        *userAuthMiddleware .for handling middleware functions then return call rout
+        
+
 
 
 

@@ -43,12 +43,14 @@ export const userLoginThunk = createAsyncThunk('/auth/login',
 
 export const userAuthThunk = createAsyncThunk('/auth/check-auth', 
     async() =>{
-        const response = axios.get('http://localhost:5000/api/auth/login',
+        const response = await axios.get('http://localhost:5000/api/auth/check-auth',
             {
                 withCredentials: true,
                 'Cache-Control' : 'no-stor, no-cache, must-revalidate, proxy-revalidate'
             }
         )
+        return response.data
+        
     }
 )
 
@@ -104,6 +106,7 @@ const authSlice = createSlice({
             state.isAuthenticated = false;
 
         })
+
         //for check authentication
         .addCase(userAuthThunk.pending, (state) =>{
             console.log('userAuthThunk pending');
@@ -111,6 +114,10 @@ const authSlice = createSlice({
             state.isLoading = true
         }).addCase(userAuthThunk.fulfilled, (state, action) =>{
             console.log('userAuthThunk fulfilled');
+            console.log('action');
+            console.log(action);
+
+            
             state.isLoading = false;
             state.user = action.payload.user ?  action.payload.user : null ;
             state.isAuthenticated = action.payload.success;

@@ -13,7 +13,9 @@ import Account from "./pages/landing/Account"
 import Listing from "./pages/landing/Listing"
 import Checkout from "./pages/landing/Checkout"
 import CheckAuth from "./components/common/CheckAuth"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { userAuthThunk } from "./store/auth-slice"
+import { useEffect } from "react"
 
 
 const App = () => {
@@ -26,6 +28,14 @@ const App = () => {
 
   const {isAuthenticated , user} = useSelector(state => state.auth)
   console.log(isAuthenticated , user);
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(userAuthThunk())
+  
+  }, [dispatch])
+  
   
 
   return (

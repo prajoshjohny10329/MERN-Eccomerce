@@ -35,6 +35,7 @@ export const userLoginThunk = createAsyncThunk('/auth/login',
                 withCredentials: true,
             }
         )
+        console.log('before');
         return response.data
 
     }
@@ -67,7 +68,7 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.user = null;
             state.isAuthenticated = false;
-
+ 
         })
         //for login
         .addCase(userLoginThunk.pending, (state) =>{
@@ -77,9 +78,10 @@ const authSlice = createSlice({
         }).addCase(userLoginThunk.fulfilled, (state, action) =>{
             console.log('userLoginThunk fulfilled');
 
+            
             state.isLoading = false;
-            state.user = action.payload;
-            state.isAuthenticated = false;
+            state.user = action.payload.user ?  action.payload.user : null ;
+            state.isAuthenticated = action.payload.success;
 
         }).addCase(userLoginThunk.rejected, (state) =>{
             console.log('userLoginThunk rejected');

@@ -13,15 +13,20 @@ import Account from "./pages/landing/Account"
 import Listing from "./pages/landing/Listing"
 import Checkout from "./pages/landing/Checkout"
 import CheckAuth from "./components/common/CheckAuth"
+import { useSelector } from "react-redux"
 
 
 const App = () => {
-  const isAuthenticate = false;
-  const user  = null;
+  // const isAuthenticated = false;
+  // const user  = null;
   // const user = {
   //   name:'hi',
   //   role: 'user'
   // };
+
+  const {isAuthenticated , user} = useSelector(state => state.auth)
+  console.log(isAuthenticated , user);
+  
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
@@ -29,7 +34,7 @@ const App = () => {
 
         {/* Auth pages  */}
         <Route path="/auth" element={
-          <CheckAuth isAuthenticate={isAuthenticate} user={user}>
+          <CheckAuth isAuthenticated={isAuthenticated} user={user}>
             <AuthLayout />
           </CheckAuth>
         }>
@@ -39,7 +44,7 @@ const App = () => {
 
         {/* for admin page  */}
         <Route path="/admin" element={
-          <CheckAuth isAuthenticate={isAuthenticate} user={user}>
+          <CheckAuth isAuthenticated={isAuthenticated} user={user}>
             <AdminLayout />
           </CheckAuth>
         }>
@@ -50,7 +55,7 @@ const App = () => {
 
         {/* for Landing page  */}
         <Route path="/" element={ 
-          <CheckAuth isAuthenticate={isAuthenticate} user={user}>
+          <CheckAuth isAuthenticated={isAuthenticated} user={user}>
             <LandingLayout />  
           </CheckAuth>
         }>

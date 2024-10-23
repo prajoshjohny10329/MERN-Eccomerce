@@ -32,6 +32,15 @@ Add Dynamic Forms
     
 Add react-toastify
 
+ADD login Signup Api 
+    Server side
+        add app.use for auth routs for deviation
+        Give server side localhost in cross origin
+    FrontEnd
+        on submit prevent default
+        dispatch userLoginThunk and userSignupThunk with form data
+        Thunk Function will call actual server api
+
 
 
 @reduxjs/toolkit axios react-router-dom

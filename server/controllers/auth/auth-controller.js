@@ -80,10 +80,11 @@ const userLogin = async (req,res) =>{
         res.cookie('AuthToken', AuthToken, {httpOnly: true, secure: false}).json({
             success: true,
             message: 'Logged in successfully !',
-            userData:{
+            user:{
                 id: userData._id,
                 email: userData.email,
-                name: userData.userName
+                name: userData.userName,
+                role: userData.role
             }
         })
 
@@ -98,4 +99,19 @@ const userLogin = async (req,res) =>{
     }
 }
 
-module.exports = { userRegister , userLogin };
+//Controller for Existing User Logout
+const userLogout = async (req, res) =>{
+    console.log('called logout');
+    console.log(req.cookies.AuthToken); 
+    
+    // res.clearCookie('AuthToken').json({
+    //     success: true,
+    //     message: "Logged Out SuccessFully"
+    // })
+
+    console.log('finished');
+    
+    
+}
+
+module.exports = { userRegister, userLogin, userLogout };

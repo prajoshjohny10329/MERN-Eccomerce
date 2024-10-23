@@ -101,17 +101,40 @@ const userLogin = async (req,res) =>{
 
 //Controller for Existing User Logout
 const userLogout = async (req, res) =>{
-    console.log('called logout');
-    console.log(req.cookies.AuthToken); 
-    
-    // res.clearCookie('AuthToken').json({
-    //     success: true,
-    //     message: "Logged Out SuccessFully"
-    // })
+    res.clearCookie('AuthToken').json({
+        success: true,
+        message: "Logged Out SuccessFully"
+    })
 
     console.log('finished');
-    
-    
 }
 
-module.exports = { userRegister, userLogin, userLogout };
+//Controller for User is Authenticated Middleware
+const userAuthMiddleware = (req,res,next) =>{
+    const authToken = req.cookies.AuthToken;
+
+    //not token
+    if(!authToken) {
+        console.log('auth token is not');
+        return res.status(401).json({
+            success: false,
+            message: "User is not Login"
+        })
+    }
+
+    //token valid
+    try {
+        const tokenDecode = jwt.verify(authToken,"SECRET_KEY")
+        req.user = tokenDecode
+        next()
+    } catch (error) {
+        console.log('error in token decode');
+        return res.status(401).json({
+            success: false,
+            message: "User is not Login"
+        })
+        
+    }
+}
+
+module.exports = { userRegister, userLogin, userLogout, userAuthMiddleware };

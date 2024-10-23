@@ -111,6 +111,8 @@ const userLogout = async (req, res) =>{
 
 //Controller for User is Authenticated Middleware
 const userAuthMiddleware = (req,res,next) =>{
+    console.log('check auth middleware called');
+    
     const authToken = req.cookies.AuthToken;
 
     //not token

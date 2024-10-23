@@ -13,6 +13,8 @@ router.post( '/logout', userLogout)
 
 //Route for user AuthMiddleware
 router.get( '/check-auth' ,userAuthMiddleware, (req,res)=>{
+    console.log('check-auth called');
+    
     const user = req.user
     return res.status(201).json({
         success: true,

@@ -41,6 +41,17 @@ export const userLoginThunk = createAsyncThunk('/auth/login',
     }
 )
 
+export const userAuthThunk = createAsyncThunk('/auth/check-auth', 
+    async() =>{
+        const response = axios.get('http://localhost:5000/api/auth/login',
+            {
+                withCredentials: true,
+                'Cache-Control' : 'no-stor, no-cache, must-revalidate, proxy-revalidate'
+            }
+        )
+    }
+)
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -51,6 +62,7 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) =>{
         builder
+        //for user signup
         .addCase(userSignupThunk.pending, (state) =>{
             console.log('pending');
             
@@ -70,6 +82,7 @@ const authSlice = createSlice({
             state.isAuthenticated = false;
  
         })
+
         //for login
         .addCase(userLoginThunk.pending, (state) =>{
             console.log('userLoginThunk pending');
@@ -85,6 +98,25 @@ const authSlice = createSlice({
 
         }).addCase(userLoginThunk.rejected, (state) =>{
             console.log('userLoginThunk rejected');
+            
+            state.isLoading = false;
+            state.user = null;
+            state.isAuthenticated = false;
+
+        })
+        //for check authentication
+        .addCase(userAuthThunk.pending, (state) =>{
+            console.log('userAuthThunk pending');
+            
+            state.isLoading = true
+        }).addCase(userAuthThunk.fulfilled, (state, action) =>{
+            console.log('userAuthThunk fulfilled');
+            state.isLoading = false;
+            state.user = action.payload.user ?  action.payload.user : null ;
+            state.isAuthenticated = action.payload.success;
+
+        }).addCase(userAuthThunk.rejected, (state) =>{
+            console.log('userAuthThunk rejected');
             
             state.isLoading = false;
             state.user = null;

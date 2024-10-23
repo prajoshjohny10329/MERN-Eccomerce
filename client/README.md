@@ -41,6 +41,10 @@ ADD login Signup Api
         dispatch userLoginThunk and userSignupThunk with form data
         Thunk Function will call actual server api
 
+Add userCheckAuth for session 
+    Frontend
+        *userAuthMiddleware .asyncThunk
+
 
 
 @reduxjs/toolkit axios react-router-dom

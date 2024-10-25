@@ -9,15 +9,9 @@ const CheckAuth = ({ isAuthenticated, user, children }) => {
   const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
 
   // Manage for IF unAuthenticated user with store current url
-  if (
-    !isAuthenticated &&
-    !(
-      urlLocation.pathname.includes("/login") ||
-      urlLocation.pathname.includes("/sign-up")
-    )
-  ) {
+  if (!isAuthenticated && !/\/(login|sign-up)/.test(urlLocation.pathname)) {
     sessionStorage.setItem("redirectAfterLogin", urlLocation.pathname);
-    return <Navigate to={"/auth/login"} />;
+    return <Navigate to="/auth/login" />;
   }
 
   // Manage for After login unAuthenticated user redirect old url
@@ -30,12 +24,6 @@ const CheckAuth = ({ isAuthenticated, user, children }) => {
   if (isAuthenticated && urlLocation.pathname.includes("/admin") && user?.role === "user") {
       return <Navigate to={"/"} />;
   }
-
-
-  // logic for Authenticated admin redirect Admin Pages
-  // if(isAuthenticated && user.role === 'admin'){
-  //   return <Navigate to={"/admin"} />;
-  // }
 
   // If Authenticated User or Admin To Access Authenticate Pages It Redirect
   if (isAuthenticated && urlLocation.pathname.includes("/auth")) {

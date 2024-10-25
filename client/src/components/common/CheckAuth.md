@@ -4,19 +4,18 @@ IF unAuthenticated user Access only
         product list
         single product
 
-IF unAuthenticated user Access Authenticated pages After login Redirect old URL
-    ex:
-        unAuthenticatedUser ===> checkout ===> login ===>  AuthenticatedUser  ===>  checkout
+Logics For CheckAuth.jsx
 
+    1.IF unAuthenticated user Access Authenticated pages After login Redirect old URL
+        ex:
+            unAuthenticatedUser ===> checkout ===> login ===>  AuthenticatedUser  ===>  checkout
 
-IF Authenticated user Access Admin pages
-    ex:
-        AuthenticatedUser  ===>  adminPages  ===>  userURL
+    2.IF Authenticated user Access Admin pages
+        ex:
+            AuthenticatedUser  ===>  adminPages  ===>  userURL
 
-If Authenticated User or Admin To Access Authenticate Pages It Redirect 
-    ex:
-        AuthenticatedUser  ===>  login/signup   ===>    '/'
-    ex:
-        AuthenticatedAdmin  ===>  login/signup   ===>    '/admin'
-
-IF
+    3.If Authenticated User or Admin To Access Authenticate Pages It Redirect 
+        ex:
+            AuthenticatedUser  ===>  login/signup   ===>    '/'
+        ex:
+            AuthenticatedAdmin  ===>  login/signup   ===>    '/admin'

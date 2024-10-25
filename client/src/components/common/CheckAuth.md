@@ -8,11 +8,11 @@ Logics For CheckAuth.jsx
 
     1.IF unAuthenticated user Access Authenticated pages After login Redirect old URL
         ex:
-            unAuthenticatedUser ===> checkout ===> login ===>  AuthenticatedUser  ===>  checkout
+            *unAuthenticatedUser ===> checkout ===> login ===>  AuthenticatedUser  ===>  checkout
 
     2.IF Authenticated user Access Admin pages
         ex:
-            AuthenticatedUser  ===>  adminPages  ===>  userURL
+            *AuthenticatedUser  ===>  adminPages  ===>  userURL
 
     3.If Authenticated User or Admin To Access Authenticate Pages It Redirect 
         ex:

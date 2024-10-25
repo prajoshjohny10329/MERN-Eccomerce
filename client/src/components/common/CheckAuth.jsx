@@ -27,6 +27,9 @@ const CheckAuth = ({ isAuthenticated, user, children }) => {
 
   // If Authenticated User or Admin To Access Authenticate Pages It Redirect
   if (isAuthenticated && urlLocation.pathname.includes("/auth")) {
+    console.log(user?.role);
+    console.log("user?.role");
+    
     const redirectPath = user?.role === "admin" ? "/admin" : "/";
     return <Navigate to={redirectPath} />;
   }

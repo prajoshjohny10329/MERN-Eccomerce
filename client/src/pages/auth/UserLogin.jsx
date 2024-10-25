@@ -12,6 +12,8 @@ const initialState = {
 };
 
 const UserLoginPage = () => {
+  console.log('user login page called');
+  
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch()
   const {toast}  = useToast()

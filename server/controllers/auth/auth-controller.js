@@ -72,7 +72,7 @@ const userLogin = async (req,res) =>{
 
         //Add jwt Token
         const AuthToken = jwt.sign({ 
-            id: userData._id , email: userData.email , name: userData.userName },
+            id: userData._id , email: userData.email , name: userData.userName, role: userData.role },
             "SECRET_KEY",
             { expiresIn:'2h' })
         

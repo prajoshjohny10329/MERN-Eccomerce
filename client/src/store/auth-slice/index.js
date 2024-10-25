@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
     isAuthenticated: false,
-    isLoading: false,
+    isLoading: true,
     user: null
 
 }
@@ -110,7 +110,6 @@ const authSlice = createSlice({
         //for check authentication
         .addCase(userAuthThunk.pending, (state) =>{
             console.log('userAuthThunk pending');
-            
             state.isLoading = true
         }).addCase(userAuthThunk.fulfilled, (state, action) =>{
             console.log('userAuthThunk fulfilled');

@@ -1,10 +1,15 @@
-
-IF unAuthenticated user Access only
-        landing page
-        product list
-        single product
-
 Logics For CheckAuth.jsx
+
+    This file mainly check User or Admin is Authenticated and its Logics
+
+    0.IF unAuthenticated user Access to Authenticated pages store current url
+        ex:
+            *unAuthenticatedUser ===> checkout ===> login
+
+        unAuthenticated user can Access only
+            *landing page
+            *product list
+            *single product
 
     1.IF unAuthenticated user Access Authenticated pages After login Redirect old URL
         ex:
@@ -19,3 +24,4 @@ Logics For CheckAuth.jsx
             AuthenticatedUser  ===>  login/signup   ===>    '/'
         ex:
             AuthenticatedAdmin  ===>  login/signup   ===>    '/admin'
+

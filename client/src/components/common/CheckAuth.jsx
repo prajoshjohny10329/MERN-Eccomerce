@@ -28,40 +28,21 @@ const CheckAuth = ({ isAuthenticated, user, children }) => {
 
   // IF Authenticated user Access Admin pages
   if (isAuthenticated && urlLocation.pathname.includes("/admin") && user?.role === "user") {
-    console.log('user is not');
-    
       return <Navigate to={"/"} />;
   }
 
-  // logic for Authenticated User for ignore Admin Pages
-  if (isAuthenticated && urlLocation.pathname.includes("/admin")) {
-    if (user?.role === "user") {
-      console.log("if2");
-
-      return <Navigate to={"/"} />;
-    }
-  }
 
   // logic for Authenticated admin redirect Admin Pages
   // if(isAuthenticated && user.role === 'admin'){
   //   return <Navigate to={"/admin"} />;
   // }
 
-  // logic for Authenticated User or admin To access admin redirect own way
-  if (
-    isAuthenticated &&
-    urlLocation.pathname.includes("/auth" || "/auth/login" || "/auth/sign-up")
-  ) {
-    if (user?.role === "admin") {
-      console.log("if3");
-
-      return <Navigate to={"/admin"} />;
-    } else {
-      console.log("if4");
-
-      return <Navigate to={"/"} />;
-    }
+  // If Authenticated User or Admin To Access Authenticate Pages It Redirect
+  if (isAuthenticated && urlLocation.pathname.includes("/auth")) {
+    const redirectPath = user?.role === "admin" ? "/admin" : "/";
+    return <Navigate to={redirectPath} />;
   }
+  
 
   return <>{children}</>;
 };

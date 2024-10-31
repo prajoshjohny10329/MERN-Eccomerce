@@ -1,4 +1,4 @@
-Logics For CheckAuth.jsx
+Logics Manual For CheckAuth.jsx
 
     This file mainly check User or Admin is Authenticated and its Logics
 

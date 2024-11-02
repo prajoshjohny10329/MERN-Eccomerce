@@ -54,6 +54,13 @@ export const userAuthThunk = createAsyncThunk('/auth/check-auth',
     }
 )
 
+export const logoutAuthThunk = createAsyncThunk('/auth/logout', 
+    async() =>{
+        const response = await axios.post('http://localhost:5000/api/auth/logout')
+        return response.data
+    }
+)
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -64,7 +71,7 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) =>{
         builder
-        //for user signup
+        //extraReducers for user signup
         .addCase(userSignupThunk.pending, (state) =>{
             console.log('pending');
             
@@ -85,7 +92,7 @@ const authSlice = createSlice({
  
         })
 
-        //for login
+        //extraReducers for login
         .addCase(userLoginThunk.pending, (state) =>{
             console.log('userLoginThunk pending');
             
@@ -107,22 +114,38 @@ const authSlice = createSlice({
 
         })
 
-        //for check authentication
+        //extraReducers for check authentication
         .addCase(userAuthThunk.pending, (state) =>{
             console.log('userAuthThunk pending');
             state.isLoading = true
         }).addCase(userAuthThunk.fulfilled, (state, action) =>{
             console.log('userAuthThunk fulfilled');
-            console.log('action');
-            console.log(action);
 
-            
             state.isLoading = false;
             state.user = action.payload.user ?  action.payload.user : null ;
             state.isAuthenticated = action.payload.success;
 
         }).addCase(userAuthThunk.rejected, (state) =>{
             console.log('userAuthThunk rejected');
+            
+            state.isLoading = false;
+            state.user = null;
+            state.isAuthenticated = false;
+
+        })
+
+        //for check logout
+        .addCase(logoutAuthThunk.pending, (state) =>{
+            console.log('logoutAuthThunk pending');
+            state.isLoading = true
+        }).addCase(logoutAuthThunk.fulfilled, (state, action) =>{
+            console.log('logoutAuthThunk fulfilled');
+            state.isLoading = false;
+            state.user =  null ;
+            state.isAuthenticated = false;
+
+        }).addCase(logoutAuthThunk.rejected, (state) =>{
+            console.log('logoutAuthThunk rejected');
             
             state.isLoading = false;
             state.user = null;

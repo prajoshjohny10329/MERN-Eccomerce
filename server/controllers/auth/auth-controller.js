@@ -101,12 +101,17 @@ const userLogin = async (req,res) =>{
 
 //Controller for Existing User Logout
 const userLogout = async (req, res) =>{
-    res.clearCookie('AuthToken').json({
+    // res.clearCookie('AuthToken').json({
+    //     success: true,
+    //     message: "Logged Out SuccessFully"
+    // })
+    console.log('logout called on server');
+
+    res.status(201).json({
         success: true,
         message: "Logged Out SuccessFully"
     })
 
-    console.log('finished');
 }
 
 //Controller for User is Authenticated Middleware

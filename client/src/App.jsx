@@ -27,9 +27,6 @@ const App = () => {
     dispatch(userAuthThunk())
   
   }, [dispatch])
-
-  console.log('after dispatch');
-  console.log(isAuthenticated);
   if (isLoading) {
     // Optionally show a loading spinner or placeholder here
     return <div>Loading...</div>;

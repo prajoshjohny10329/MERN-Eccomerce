@@ -34,18 +34,10 @@ const DynamicSidebar = () =>{
         adminSidebarItems.map(menuItem =>(
           <div key={menuItem.id} onClick={()=> navigate(menuItem.path)} className="flex cursor-pointer items-center gap-2 rounded-sm shadow-lg p-3 mt-1 hover:bg-slate-50">
             {menuItem.icon}
-            {
-              console.log(menuItem.icon)
-              
-            }
             <div className='text-lg font-bold'>{menuItem.label}</div>
           </div>
         ))
       }
-      {/* <div onClick={()=> navigate('/admin/dashboard')} className="flex cursor-pointer items-center gap-2 py-3">
-          <ChartArea /> 
-          <h1 className='text-lg font-bold'>Admin Panel</h1>
-        </div> */}
 
     </nav>
   )

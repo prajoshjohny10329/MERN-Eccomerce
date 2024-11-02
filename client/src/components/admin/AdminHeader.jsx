@@ -4,7 +4,7 @@ import { AlignJustify, LogOut } from 'lucide-react'
 
 const AdminHeader = () => {
   return (
-    <header className="flex items-center justify-between px-4 py-3 bg-transparent border-b">
+    <header className="flex items-center justify-between px-4 py-3 bg-transparent border-b shadow-md">
       <Button className='lg:hidden sm:block'>
         <AlignJustify />
         <span className='sr-only'>Toggle Menu</span>

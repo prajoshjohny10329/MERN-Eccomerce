@@ -4,6 +4,8 @@ import { Navigate, useLocation } from "react-router-dom";
 const CheckAuth = ({ isAuthenticated, user, children }) => {
   //return current url location
   console.log("check auth called");
+  console.log(user);
+  
 
   const urlLocation = useLocation();
   const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
@@ -27,8 +29,10 @@ const CheckAuth = ({ isAuthenticated, user, children }) => {
 
   // If Authenticated User or Admin To Access Authenticate Pages It Redirect
   if (isAuthenticated && urlLocation.pathname.includes("/auth")) {
+    console.log('trigger');
+    
     const redirectPath = user?.role === "admin" ? "/admin" : "/";
-    return <Navigate to={redirectPath} />;
+    return <Navigate message={'hi'} to={redirectPath} />;
   }
   
 

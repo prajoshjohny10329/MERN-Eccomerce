@@ -143,7 +143,6 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.user =  null ;
             state.isAuthenticated = false;
-
         }).addCase(logoutAuthThunk.rejected, (state) =>{
             console.log('logoutAuthThunk rejected');
             

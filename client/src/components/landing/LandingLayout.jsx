@@ -2,7 +2,9 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import LandingHeader from './LandingHeader'
 
-const LandingLayout = () => {
+const LandingLayout = ({message}) => {
+  console.log(message);
+  
   return (
     <div className='flex flex-col bg-white overflow-hidden'>
       {/* Header  */}

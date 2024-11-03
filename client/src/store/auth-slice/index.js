@@ -54,6 +54,19 @@ export const userAuthThunk = createAsyncThunk('/auth/check-auth',
     }
 )
 
+// export const googleAuthThunk = createAsyncThunk('/auth/google', 
+//     async() =>{
+//         const response = await axios.post('http://localhost:5000/api/auth/google',
+//             {
+//                 withCredentials: true,
+//                 'Cache-Control' : 'no-stor, no-cache, must-revalidate, proxy-revalidate'
+//             }
+//         )
+//         return response.data
+        
+//     }
+// )
+
 export const logoutAuthThunk = createAsyncThunk('/auth/logout', 
     async() =>{
         const response = await axios.post('http://localhost:5000/api/auth/logout')

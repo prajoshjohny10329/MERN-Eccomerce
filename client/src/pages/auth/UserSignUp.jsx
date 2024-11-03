@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link,useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast"
+import GoogleAuth from "@/components/auth/GoogleAuth";
 
 
 const initialState = {
@@ -65,6 +66,7 @@ const UserSignUp = () => {
           </Link>
         </p>
       </div>
+      <GoogleAuth />
       <CommonForm
         formControls={signUpFormControls}
         buttonText={"Sign Up"}

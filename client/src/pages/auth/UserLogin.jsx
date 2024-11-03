@@ -5,7 +5,7 @@ import { userLoginThunk } from "@/store/auth-slice";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import GoogleButton from 'react-google-button'
+import GoogleAuth from "@/components/auth/GoogleAuth";
 
 const initialState = {
   email: "",
@@ -13,35 +13,33 @@ const initialState = {
 };
 
 const UserLoginPage = () => {
-  console.log('user login page called');
-  
+  console.log("user login page called");
+
   const [formData, setFormData] = useState(initialState);
-  const dispatch = useDispatch()
-  const {toast}  = useToast()
+  const dispatch = useDispatch();
+  const { toast } = useToast();
 
   const onSubmit = (event) => {
-    event.preventDefault()
-    dispatch(userLoginThunk(formData)).then((data) =>{
-      const {message, success, user = null}  =  data.payload
+    event.preventDefault();
+    dispatch(userLoginThunk(formData)).then((data) => {
+      const { message, success, user = null } = data.payload;
       console.log(data.payload);
-      
 
-      if(success){
+      if (success) {
         toast({
           title: "Success",
           description: message,
-          className: 'bg-black text-green-500'
-        })
-      }else{
+          className: "bg-black text-green-500",
+        });
+      } else {
         toast({
           variant: "destructive",
           title: "Warning",
           description: message,
           className: "bg-black text-red-500",
-        })
-      }      
-    })
-
+        });
+      }
+    });
   };
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
@@ -60,12 +58,8 @@ const UserLoginPage = () => {
         </p>
       </div>
 
-      <div className="flex justify-center">  {/* Change h-screen if you don't want full height */}
-  <GoogleButton onClick={() => { console.log('Google button clicked') }}/>
-</div>
+      <GoogleAuth />
 
-
-      
       <CommonForm
         formControls={loginFormControls}
         buttonText={"Sign Up"}
@@ -73,8 +67,6 @@ const UserLoginPage = () => {
         setFormData={setFormData}
         onSubmit={onSubmit}
       />
-
-
     </div>
   );
 };

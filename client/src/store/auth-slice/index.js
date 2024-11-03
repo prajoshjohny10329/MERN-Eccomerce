@@ -54,18 +54,21 @@ export const userAuthThunk = createAsyncThunk('/auth/check-auth',
     }
 )
 
-// export const googleAuthThunk = createAsyncThunk('/auth/google', 
-//     async() =>{
-//         const response = await axios.post('http://localhost:5000/api/auth/google',
-//             {
-//                 withCredentials: true,
-//                 'Cache-Control' : 'no-stor, no-cache, must-revalidate, proxy-revalidate'
-//             }
-//         )
-//         return response.data
+export const googleAuthThunk = createAsyncThunk('/auth/google', 
+    async() =>{
+        const response = await axios.post('http://localhost:5000/api/auth/google',
+            formData,
+            {
+                withCredentials: true,
+            }
+        )
+        console.log(response.data);
+        console.log(response.data);
         
-//     }
-// )
+        // return response.data
+        
+    }
+)
 
 export const logoutAuthThunk = createAsyncThunk('/auth/logout', 
     async() =>{
@@ -158,6 +161,24 @@ const authSlice = createSlice({
             state.isAuthenticated = false;
         }).addCase(logoutAuthThunk.rejected, (state) =>{
             console.log('logoutAuthThunk rejected');
+            
+            state.isLoading = false;
+            state.user = null;
+            state.isAuthenticated = false;
+
+        })
+
+        //for check logout
+        .addCase(googleAuthThunk.pending, (state) =>{
+            console.log('googleAuthThunk pending');
+            state.isLoading = true
+        }).addCase(googleAuthThunk.fulfilled, (state, action) =>{
+            console.log('googleAuthThunk fulfilled');
+            state.isLoading = false;
+            state.user = action.payload.user ?  action.payload.user : null ;
+            state.isAuthenticated = action.payload.success;
+        }).addCase(googleAuthThunk.rejected, (state) =>{
+            console.log('googleAuthThunk rejected');
             
             state.isLoading = false;
             state.user = null;

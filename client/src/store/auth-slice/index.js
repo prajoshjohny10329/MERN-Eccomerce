@@ -55,15 +55,20 @@ export const userAuthThunk = createAsyncThunk('/auth/check-auth',
 )
 
 export const googleAuthThunk = createAsyncThunk('/auth/google', 
-    async() =>{
-        const response = await axios.post('http://localhost:5000/api/auth/google',
-            formData,
+    async(token) =>{
+        console.log('before call server');
+        console.log(token);
+        const hi = "ghjhhg"
+        
+        
+        const response = await axios.post('http://localhost:5000/api/auth/google-auth',
+            {token},
             {
                 withCredentials: true,
             }
         )
         console.log(response.data);
-        console.log(response.data);
+        console.log("response.data");
         
         // return response.data
         

@@ -1,7 +1,6 @@
 import { googleAuthThunk } from "@/store/auth-slice";
 import { GoogleLogin } from "@react-oauth/google";
 import React from "react";
-import GoogleButton from "react-google-button";
 import { useDispatch } from "react-redux";
 
 const GoogleAuth = () => {

@@ -57,7 +57,9 @@ Login with Google
         *Add credential in google api and services
         *npm install @react-oauth/google 
         *use GoogleOAuthProvider with google client ID
-        
+    Backend
+        *npm install google-auth-library
+
 
 
         

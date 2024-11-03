@@ -5,6 +5,7 @@ import { userLoginThunk } from "@/store/auth-slice";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import GoogleButton from 'react-google-button'
 
 const initialState = {
   email: "",
@@ -58,6 +59,13 @@ const UserLoginPage = () => {
           </Link>
         </p>
       </div>
+
+      <div className="flex justify-center">  {/* Change h-screen if you don't want full height */}
+  <GoogleButton onClick={() => { console.log('Google button clicked') }}/>
+</div>
+
+
+      
       <CommonForm
         formControls={loginFormControls}
         buttonText={"Sign Up"}
@@ -65,6 +73,8 @@ const UserLoginPage = () => {
         setFormData={setFormData}
         onSubmit={onSubmit}
       />
+
+
     </div>
   );
 };

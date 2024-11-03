@@ -49,6 +49,17 @@ Add userCheckAuth for session
     BACKEND
         */check-auth        . 
         *userAuthMiddleware .for handling middleware functions then return call rout
+
+Login with Google
+    Frontend
+        *if you are using vite .env file variables start with VITE_ and
+        *if you are using vite import .env  variables import.meta.env, process.env not working
+        *Add credential in google api and services
+        *npm install @react-oauth/google 
+        *use GoogleOAuthProvider with google client ID
+        
+
+
         
 
 

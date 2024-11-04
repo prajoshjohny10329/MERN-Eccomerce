@@ -12,16 +12,29 @@ const UserSchema = new mongoose.Schema({
     },
     password : {
         type : String,
-        required: true,
+        // required: true,
+        required: function(){
+            return this.userFrom === 'app';
+       }
     },
     phone : {
         type : String,
-        required: true,
+        required: function(){
+             return this.userFrom === 'app';
+        },
+        // required: true,
         unique: true
     },
     role : {
         type : String,
         default: 'user'
+    },
+    picture : {
+        type : String
+    },
+    userFrom : {
+        type : String,
+        default: 'app'
     },
     createdAt: { 
         type: Date, 

@@ -1,6 +1,6 @@
 const express  = require('express');
 const { userRegister, userLogin, userLogout, userAuthMiddleware } = require('../../controllers/auth/auth-controller');
-const { googleAuthController } = require('../../controllers/auth/auth-thirdparty');
+const { googleAuthController } = require('../../controllers/auth/auth-google');
 const router = express.Router();
 
 //Route for create new user

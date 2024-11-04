@@ -2,6 +2,15 @@
 import { Boxes, ChartArea, LayoutDashboard } from 'lucide-react'
 import React, { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
 
 // admin sidebar  
 const adminSidebarItems = [
@@ -44,9 +53,19 @@ const DynamicSidebar = () =>{
 }
 
 // AdminSideBar Component
-const AdminSideBar = () => {
+const AdminSideBar = ({open, setOpen}) => {
   return (
     <Fragment>
+      <Sheet open={open} onOpenChange={setOpen}>
+      <SheetContent side='top' className='w-64 bg-white'>
+        <div className="flex flex-col h-full">
+        <SheetHeader className='border-b'>
+          <SheetTitle className='text-xl flex justify-center font-black' >Amin Panel</SheetTitle>
+        </SheetHeader>
+        <DynamicSidebar />
+        </div>
+      </SheetContent>
+      </Sheet>
       <aside className="hidden w-64 flex-col border-r-2 bg-transparent p-6 lg:flex ">
         <h1 className='text-xl flex justify-center font-black'>Amin Panel</h1>
         <DynamicSidebar />

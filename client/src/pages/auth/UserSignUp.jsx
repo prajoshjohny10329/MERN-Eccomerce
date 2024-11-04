@@ -33,6 +33,7 @@ const UserSignUp = () => {
             description: message,
             className: 'bg-black text-green-500'
           })
+          navigate('/')
       }else{
         toast({
           variant: "destructive",

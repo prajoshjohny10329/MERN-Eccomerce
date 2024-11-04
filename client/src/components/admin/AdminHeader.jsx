@@ -5,10 +5,10 @@ import LogoutButton from '../common/logoutButton'
 
 
 
-const AdminHeader = () => {
+const AdminHeader = ({setOpen}) => {
   return (
     <header className="flex items-center justify-between px-4 py-3 bg-transparent border-b shadow-md">
-      <Button className='lg:hidden sm:block'>
+      <Button className='lg:hidden sm:block' onClick={ ()=> setOpen(true) }>
         <AlignJustify />
         <span className='sr-only'>Toggle Menu</span>
       </Button>

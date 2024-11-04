@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { authTokenCreator, responseLoginSuccess } = require('../../helper/auth/auth-helper');
 
 
 //Controller for new User register
@@ -71,26 +72,28 @@ const userLogin = async (req,res) =>{
 
 
         //Add jwt Token
-        const AuthToken = jwt.sign({ 
-            id: userData._id , email: userData.email , name: userData.userName, role: userData.role },
-            "SECRET_KEY",
-            { expiresIn:'2h' })
+        const authToken = authTokenCreator(userData);
         
         //if Success send data with cookie
-        res.cookie('AuthToken', AuthToken, {httpOnly: true, secure: false}).json({
-            success: true,
-            message: 'Logged in successfully !',
-            user:{
-                id: userData._id,
-                email: userData.email,
-                name: userData.userName,
-                role: userData.role
-            }
-        })
+        console.log('before response for login');
+        
+        responseLoginSuccess(res, authToken, userData)
+        // res.cookie('authToken', authToken, {httpOnly: true, secure: false}).json({
+        //     success: true,
+        //     message: 'Logged in successfully !',
+        //     user:{
+        //         id: userData._id,
+        //         email: userData.email,
+        //         name: userData.userName,
+        //         role: userData.role
+        //     }
+        // })
 
 
     } catch (error) {
         console.log('error in catch login api');
+        console.log(error);
+        
         res.status(201).json({
             success: false,
             message: 'Something Wrong Try Again'

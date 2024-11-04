@@ -2,116 +2,101 @@ const bcrypt = require("bcryptjs");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const {
-  authTokenCreator,
-  responseLoginSuccess,
+    authTokenCreator,
+    responseLoginSuccess,
 } = require("../../helper/auth/auth-helper");
 
-//Controller for new User register
-const userRegister = async (req, res) => {
-  try {
-    const { name, email, phone, password } = req.body;
-    const hashPassword = await bcrypt.hash(password, 12);
+module.exports = {
 
-    const newUser = await User({
-      userName: name,
-      email,
-      phone,
-      password: hashPassword,
-    });
-    await newUser.save();
+    //Controller for new User register
+    userRegister: async (req, res) => {
+        try {
+            const { name, email, phone, password } = req.body;
+            const isEmail = await User.findOne({ email });
+            const isPhone = await User.findOne({ phone });
 
-    console.log(newUser);
+            //check duplication user or phone
+            if (isEmail || isPhone) {
+                return res.status(200).json({
+                    success: false,
+                    message: isEmail ? "Email Exist" : "Phone Number Exist"
+                });
+            }
+            //create to new user
+            const hashPassword = await bcrypt.hash(password, 12);
+            const userData = await User.create({
+                userName: name,
+                email,
+                phone,
+                password: hashPassword,
+            });
+            const authToken = authTokenCreator(userData);
+            //if Success send data with cookie
+            responseLoginSuccess(res, authToken, userData);
 
-    res.status(201).json({
-      success: true,
-      message: "Registration Success Full",
-      user: newUser,
-    });
-  } catch (error) {
-    console.log("signup Error");
+        } catch (error) {
+            res.status(500).json({ success: false, message: "Error In Registration" });
+        }
+    },
 
-    if (error.code == 11000) {
-      if (error.keyPattern.email == 1) {
-        return res
-          .status(200)
-          .json({ success: false, message: "Email  Exist" });
-      }
+    //Controller for Existing User Login
+    userLogin: async (req, res) => {
+        try {
+            const { email, password } = req.body;
+            const userData = await User.findOne({ email });
+            if (!userData) {
+                return res.status(201).json({
+                    success: false,
+                    message: "user is not exists! please check Email",
+                });
+            }
+            
+            //check password is exist on database
+            const hashPassword = await bcrypt.compare(password, userData.password);
+            if (!hashPassword) {
+                return res.status(201).json({
+                    success: false,
+                    message: "Invalid Password! please check password",
+                });
+            }
+            //Add jwt Token
+            const authToken = authTokenCreator(userData);
+            //if Success send data with cookie
+            responseLoginSuccess(res, authToken, userData);
 
-      if (error.keyPattern.phone == 1) {
-        return res
-          .status(200)
-          .json({ success: false, message: "Phone Number  Exist" });
-      }
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: "Something Wrong Try Again",
+            });
+        }
+    },
+
+    //Controller for Existing User Logout
+    userLogout: async (req, res) => {
+        res.status(200).clearCookie("AuthToken").json({
+            success: true,
+            message: "Logged Out SuccessFully",
+        });
+    },
+
+    //After Auth Middleware
+    checkAuth: (req, res) => {
+        console.log('auth controller');
+        
+        try {
+            res.status(200).json({
+                success: true,
+                message: "User is Authenticated",
+                user: req.user
+            })
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: "Something wrong checkAuth",
+            })
+        }
     }
+}
 
-    res.status(200).json({ success: false, message: "Error In Registration" });
-  }
-};
 
-//Controller for Existing User Login
-const userLogin = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const userData = await User.findOne({ email });
-    if (!userData) {
-      return res.status(201).json({
-        success: false,
-        message: "user is not exists! please check Email",
-      });
-    }
-
-    //check password is exist on database
-    const hashPassword = await bcrypt.compare(password, userData.password);
-    if (!hashPassword) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid Password! please check password",
-      });
-    }
-
-    //Add jwt Token
-    const authToken = authTokenCreator(userData);
-
-    //if Success send data with cookie
-    responseLoginSuccess(res, authToken, userData);
-  } catch (error) {
-    res.status(201).json({
-      success: false,
-      message: "Something Wrong Try Again",
-    });
-  }
-};
-
-//Controller for Existing User Logout
-const userLogout = async (req, res) => {
-  res.status(201).clearCookie("AuthToken").json({
-    success: true,
-    message: "Logged Out SuccessFully",
-  });
-};
-
-//User is Authenticated Middleware
-const userAuthMiddleware = (req, res, next) => {
-  try {
-    const authToken = req.cookies.authToken;
-
-    //not get auth token or jwt token
-    if (!authToken) {
-      return res
-        .status(401)
-        .json({ success: false, message: "User is not Login" });
-    }
-
-    //check and assign decoded auth token to user
-    req.user = jwt.verify(authToken, "SECRET_KEY");
-    next();
-
-  } catch (error) {
-    return res.status(401).json({
-      success: false,
-      message: "User is not Login",
-    });
-  }
-};
-
-module.exports = { userRegister, userLogin, userLogout, userAuthMiddleware };

@@ -1,16 +1,13 @@
-// const User = require('../../models/User')
-
 const { OAuth2Client } = require('google-auth-library');
 const User = require('../../models/User');
 const { authTokenCreator, responseLoginSuccess } = require('../../helper/auth/auth-helper');
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 
 //Controller for Google User  login and signup
 const googleAuthController = async (req, res) =>{
     try {
-
         //google verifyIdToken 
+        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
         const ticket = await client.verifyIdToken({
             idToken: req.body.token,
             audience: process.env.GOOGLE_CLIENT_ID,
@@ -36,7 +33,6 @@ const googleAuthController = async (req, res) =>{
             message: 'Something Wrong Try Again'
         })
     }
- 
     
 }
 

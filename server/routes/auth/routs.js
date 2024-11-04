@@ -1,5 +1,5 @@
 const express  = require('express');
-const { userRegister, userLogin, userLogout } = require('../../controllers/auth/auth-controller');
+const { userRegister, userLogin, userLogout, checkAuth } = require('../../controllers/auth/auth-controller');
 const { googleAuthController } = require('../../controllers/auth/auth-google');
 const { userAuthMiddleware } = require('../../middleware/auth-middleware');
 const router = express.Router();
@@ -17,13 +17,6 @@ router.post( '/logout', userLogout)
 router.post( '/google-auth', googleAuthController)
 
 //Route for user AuthMiddleware
-router.get( '/check-auth' ,userAuthMiddleware, (req,res)=>{
-    
-    res.status(201).json({
-        success: true,
-        message: "User is Authenticated",
-        user: req.user
-    })
-})
+router.get( '/check-auth' ,userAuthMiddleware, checkAuth)
 
 module.exports = router;

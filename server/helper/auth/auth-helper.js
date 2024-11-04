@@ -10,7 +10,7 @@ module.exports ={
             { expiresIn:'2h' })
     },
 
-    //create new user from google auth
+    //send response user data to  frontend
     responseLoginSuccess: (res, authToken, userData) =>{
         res.status(201).cookie('authToken', authToken, {httpOnly: true, secure: false}).json({
             success: true,

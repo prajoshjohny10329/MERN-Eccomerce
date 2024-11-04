@@ -50,7 +50,6 @@ export const userAuthThunk = createAsyncThunk('/auth/check-auth',
             }
         )
         return response.data
-        
     }
 )
 
@@ -58,8 +57,6 @@ export const googleAuthThunk = createAsyncThunk('/auth/google',
     async(token) =>{
         console.log('before call server');
         console.log(token);
-        const hi = "ghjhhg"
-        
         
         const response = await axios.post('http://localhost:5000/api/auth/google-auth',
             {token},
@@ -67,10 +64,10 @@ export const googleAuthThunk = createAsyncThunk('/auth/google',
                 withCredentials: true,
             }
         )
-        console.log(response.data);
         console.log("response.data");
+        console.log(response.data);
         
-        // return response.data
+        return response.data
         
     }
 )
@@ -135,17 +132,15 @@ const authSlice = createSlice({
 
         })
 
-        //extraReducers for check authentication
+        //extraReducers for check authentication middleware
         .addCase(userAuthThunk.pending, (state) =>{
             console.log('userAuthThunk pending');
             state.isLoading = true
         }).addCase(userAuthThunk.fulfilled, (state, action) =>{
             console.log('userAuthThunk fulfilled');
-
             state.isLoading = false;
             state.user = action.payload.user ?  action.payload.user : null ;
             state.isAuthenticated = action.payload.success;
-
         }).addCase(userAuthThunk.rejected, (state) =>{
             console.log('userAuthThunk rejected');
             
@@ -155,7 +150,7 @@ const authSlice = createSlice({
 
         })
 
-        //for check logout
+        //extraReducers for check logout
         .addCase(logoutAuthThunk.pending, (state) =>{
             console.log('logoutAuthThunk pending');
             state.isLoading = true
@@ -173,7 +168,7 @@ const authSlice = createSlice({
 
         })
 
-        //for check logout
+        //Reducer for google user authentication
         .addCase(googleAuthThunk.pending, (state) =>{
             console.log('googleAuthThunk pending');
             state.isLoading = true

@@ -60,7 +60,13 @@ Login with Google
     Backend
         *npm install google-auth-library
         *jwt, create new user userFrom : "Google"
-Sheet Component 
+
+Admin
+    Sidebar
+        *Sheet Component 
+    Product
+        *add product from
+        *upload image component
     
 
 

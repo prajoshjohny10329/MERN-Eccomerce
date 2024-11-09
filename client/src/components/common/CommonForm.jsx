@@ -37,15 +37,14 @@ const CommonForm = ({formControls, formData, setFormData, onSubmit, buttonText})
                         [getControlItem.name] : value
                     })} value={value} >
                         <SelectTrigger className='w-full'>
-                            <SelectValue placeholder={getControlItem.placeholder}>
-
+                            <SelectValue placeholder={getControlItem.label}>
                             </SelectValue>
-                            <SelectContent>
+                            <SelectContent className="bg-white">
                                 {
                                     getControlItem.options &&
                                     getControlItem.options.length > 0 ?
-                                    getControlItem.options.map(optionItem => <SelectItem key={optionItem.id} value={optionItem.label}>
-
+                                    getControlItem.options.map(optionItem => <SelectItem className="hover:bg-slate-100" key={optionItem.id} value={optionItem.label}>
+                                        {optionItem.label}
                                     </SelectItem>) : null
                                 }
                             </SelectContent>

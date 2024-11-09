@@ -1,6 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { UploadCloudIcon } from "lucide-react";
+import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import React, { useRef } from "react";
 
 const ProductImageUpload = ({
@@ -26,6 +27,15 @@ const ProductImageUpload = ({
     const dropImageFile = event.dataTransfer.files?.[0];
     if(dropImageFile)  setImageFile(dropImageFile)
   }
+
+  const removeImageFile = () =>{
+    setImageFile(null)
+    if(inputRef.current){
+      inputRef.current.value = ''
+
+    }
+    
+  }
   return (
     <div className="w-full mt-1">
       <Label className="mb-1">Product Image Upload</Label>
@@ -43,7 +53,18 @@ const ProductImageUpload = ({
             <span>Drag and Drop or click to upload</span>
           </Label>
         ) : (
-          <div></div>
+          <div className="flex items-center justify-between">
+            <div className="flex justify-between items-center">
+              <FileIcon className="w-8 text-black mr-2" />
+              {console.log(imageFile)
+              }
+              <p className="text-sm font-medium">{imageFile.name}</p>
+              <Button variant="ghost" size="icon" onClick={removeImageFile} >
+                <XIcon className="w-4 h-4"></XIcon>
+                <span className="sr-only">Remove File</span>
+              </Button>
+            </div>
+          </div>
         )}
       </div>
     </div>

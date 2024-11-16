@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import axios from "axios";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 const ProductImageUpload = ({
   imageFile,
@@ -17,6 +18,22 @@ const ProductImageUpload = ({
     const imageFile = event.target.files?.[0];
     if (imageFile) setImageFile(imageFile);
   };
+
+  const uploadImageToCloudinary = async () =>{
+    const data = new FormData();
+    data.append("image_file",imageFile);
+    const response = await axios.post('http://localhost:5000/api/admin/product/product-image-upload', data)
+    console.log(response, 'response');
+    
+
+    
+  }
+
+  useEffect(() => {
+    if(imageFile != null) uploadImageToCloudinary()
+
+  }, [imageFile])
+  
 
   //prevent default for drag
   const handelOnDrag = event =>  event.preventDefault()

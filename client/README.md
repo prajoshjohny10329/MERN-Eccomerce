@@ -32,7 +32,7 @@ Add Dynamic Forms
     
 Add react-toastify
 
-ADD login Signup Api 
+Add login Signup Api 
     Server side
         add app.use for auth routs for deviation
         Give server side localhost in cross origin
@@ -63,10 +63,11 @@ Login with Google
 
 Admin
     Sidebar
-        *Sheet Component 
+        *Sheet Component
     Product
         *add product from
         *upload image component
+            $ darg, drop, input ref={inputRef}
     
 
 

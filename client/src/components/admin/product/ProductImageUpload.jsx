@@ -14,28 +14,28 @@ const ProductImageUpload = ({
 
   //handel file change
   const handelImageFileChange = (event) => {
-    console.log("handel change");
     const imageFile = event.target.files?.[0];
     if (imageFile) setImageFile(imageFile);
   };
-  //for handelOnDrag
+
+  //prevent default for drag
   const handelOnDrag = event =>  event.preventDefault()
 
-  //for handelOnDrop
+  //image File set Function
   const handelOnDrop = (event) =>{
     event.preventDefault()
     const dropImageFile = event.dataTransfer.files?.[0];
     if(dropImageFile)  setImageFile(dropImageFile)
   }
 
+  //function for image remove at imageFile state
   const removeImageFile = () =>{
     setImageFile(null)
     if(inputRef.current){
       inputRef.current.value = ''
-
     }
-    
   }
+  
   return (
     <div className="w-full mt-1">
       <Label className="mb-1">Product Image Upload</Label>

@@ -6,10 +6,6 @@ require('dotenv').config()
 
 const AuthRouter = require('./routes/auth/routs')
 
-
-
-
-
 //DB Connect
 mongoose.connect(process.env.DB_ADDRESS)
         .then( () => console.log("DB Connected"))

@@ -8,7 +8,6 @@ cloudinary.config({
 });
 
 const storage = new multer.memoryStorage();
-
 const imageUploadUtils = async (file) =>{
     try {
         const uploadResult = await cloudinary.uploader.upload(file, { resource_type: 'auto' })
@@ -17,6 +16,5 @@ const imageUploadUtils = async (file) =>{
         console.log(error, 'error in uploadImage');
     }
 }
-
 const upload = multer({multer})
 module.exports = {upload, imageUploadUtils}

@@ -6,3 +6,5 @@ const router = express.Router()
 
 
 router.post("/product-image-upload", upload.single("file"), handleImageUpload)
+
+module.exports = router

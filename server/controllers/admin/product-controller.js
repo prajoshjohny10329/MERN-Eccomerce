@@ -4,8 +4,10 @@ module.exports ={
     handleImageUpload : async (req, res) => {
         try {
             const b64 = Buffer.from(req.file.buffer).toString('base64')
-            const url = "data:" + req.file.mimetype + ";base64" + b64;
-            const result = await imageUploadUtils(b64)
+            // const url = "data:" + req.file.mimetype + ";base64" + b64;
+            const url = `data:${req.file.mimetype};base64,${b64}`; // Correct prefix
+            
+            const result = await imageUploadUtils(url)
             res.status(201).json({
                 success: true,
                 result
